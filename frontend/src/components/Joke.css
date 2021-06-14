@@ -1,0 +1,11 @@
+.joke-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.delivery {
+font-size:1.3rem;
+}
+.setup {
+	font-size: 2rem;
+}
