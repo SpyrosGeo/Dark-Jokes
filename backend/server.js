@@ -37,10 +37,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var mongoose_1 = require("mongoose");
+var uuid_1 = require("uuid");
 var URI = "mongodb+srv://thatguy:4f0ZWPyJn2GfPPXV@password-gen.moyya.mongodb.net/darkjokes?retryWrites=true&w=majority";
 var JokeSchema = new mongoose_1.Schema({
     joke: { type: String, required: true },
-    id: { type: Number, required: true }
+    id: { type: String, required: true }
 });
 var JokeModel = mongoose_1.model('Joke', JokeSchema);
 run()["catch"](function (err) { return console.log(err); });
@@ -57,7 +58,7 @@ function run() {
                     _a.sent();
                     joke = new JokeModel({
                         joke: 'Koulis sex life',
-                        id: 1
+                        id: uuid_1.v4()
                     });
                     return [4 /*yield*/, joke.save()];
                 case 2:

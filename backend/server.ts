@@ -1,4 +1,5 @@
 import {model,Schema,Model, connect} from 'mongoose'
+import {v4 as uuidv4} from 'uuid'
 interface IJoke{
 	joke:String;
 	id:Number;
@@ -6,9 +7,8 @@ interface IJoke{
 let URI="mongodb+srv://thatguy:4f0ZWPyJn2GfPPXV@password-gen.moyya.mongodb.net/darkjokes?retryWrites=true&w=majority"
 const JokeSchema:Schema = new Schema({
 	joke:{type:String, required:true},
-	id:{type:Number, required:true}
+	id:{type:String, required:true}
 })
-
 const JokeModel: Model<IJoke>= model('Joke',JokeSchema)
 run().catch(err=>console.log(err))
 	async function run():Promise<void>{
@@ -18,7 +18,7 @@ run().catch(err=>console.log(err))
 		})
 		const joke = new JokeModel({
 			joke:'Koulis sex life',
-			id:1,
+			id:uuidv4(),
 		})
 		await joke.save()
 	}
