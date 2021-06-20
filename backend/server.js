@@ -1,11 +1,13 @@
 const mongoose = require("mongoose")
 const express = require("express")
 const cors = require("cors")
+const bodyParser = require('body-parser')
 const app = express()
 const PORT =5000;
 
 
 const URI = "mongodb+srv://thatguy:4f0ZWPyJn2GfPPXV@password-gen.moyya.mongodb.net/darkjokes?retryWrites=true&w=majority"
+app.use(bodyParser.json())
 app.use(cors())
 mongoose.connect(URI,{
 	useUnifiedTopology:true,
@@ -29,6 +31,8 @@ app.get('/',(req,res)=>{
 app.post('/favorite',(req,res)=>{
 	// console.log(res.params)
 	console.log("post works correctly")
+	console.log(req.params)
+	res.send({success:true})
 })
 app.listen(PORT,()=>{
 	console.log(`server running on port: ${PORT}`)
