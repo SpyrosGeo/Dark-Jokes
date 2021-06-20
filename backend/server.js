@@ -27,7 +27,7 @@ app.get('/',(req,res)=>{
 	res.send({"hello":"fuck"})
 })
 app.post('/favorite',(req,res)=>{
-	console.log(res.body)
+	// console.log(res.params)
 	console.log("post works correctly")
 })
 app.listen(PORT,()=>{
