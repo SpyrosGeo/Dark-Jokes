@@ -18,13 +18,13 @@ const App: React.FC = () => {
   });
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${URL}${choice}`);
-      if (response && response.data) {
-        setJoke({
-          setup: response.data.setup,
-          delivery: response.data.deliver,
-        });
-      }
+      const response = await axios.get("http://localhost:5000/favorite");
+    const {joke} = response.data.favorites[0]
+    const {setup,delivery} =joke
+    setJoke({
+      setup,
+      delivery
+    })
     };
     fetchData();
   }, [choice])
