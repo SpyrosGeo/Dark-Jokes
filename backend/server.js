@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 const express = require("express")
 const cors = require("cors")
 const bodyParser = require('body-parser')
+const jokes = require("./Models/Jokes")
 const app = express()
 const PORT =5000;
 
@@ -14,25 +15,31 @@ mongoose.connect(URI,{
 	useNewUrlParser:true
 })
 
-// const connection = mongoose.connection;
-// const jokeSchema = new mongoose.Schema({
-// 	joke:String,
-// 	id:String,
-// })
-// const Joke = mongoose.model("Joke",jokeSchema)
+const connection = mongoose.connection;
 
-// connection.once("open",()=>{
-// 	console.log("Connected to db")
-// })
-// app.use("/",router)
-app.get('/',(req,res)=>{
-	res.send({"hello":"fuck"})
+connection.once("open",()=>{
+	console.log("Connected to db")
 })
-app.post('/favorite',(req,res)=>{
-	// console.log(res.params)
-	console.log("post works correctly")
-	console.log(req.params)
-	res.send({success:true})
+// app.use("/",router)
+app.get('/favorite', async(req,res)=>{
+	try {
+		
+		const response = await Jokes.find()
+		res.json({"favorites":response})
+	} catch (error) {
+	res.json({"error":error})
+	}
+})
+app.post('/favorite',async(req,res)=>{
+	try {
+	const response = jokes.create(req.body)	
+	res.json({
+		status:"ok",
+		data:response,
+	})
+	} catch (err) {
+		
+	}
 })
 app.listen(PORT,()=>{
 	console.log(`server running on port: ${PORT}`)

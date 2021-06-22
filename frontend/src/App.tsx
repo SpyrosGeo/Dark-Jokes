@@ -49,9 +49,10 @@ const App: React.FC = () => {
     const response = await axios({
       method: "post",
       url: "http://localhost:5000/favorite",
-      data: {
-        fuck: true,
-      },
+    data:{
+      joke,
+      _id:"1234"
+    }  
     });
     console.log(response);
   };
