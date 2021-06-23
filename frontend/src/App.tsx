@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import Joke from "./components/Joke";
 import Selector from "./components/Selector";
+import Favorite from "./components/Favorite";
 import "./App.css";
 import axios from "axios";
 import {v4 as uuidv4} from "uuid"
@@ -74,6 +75,9 @@ const App: React.FC = () => {
         </div>
       </div>
       <Joke joke={joke} />
+      <div>
+        <Favorite />
+      </div>
     </div>
   );
 };
