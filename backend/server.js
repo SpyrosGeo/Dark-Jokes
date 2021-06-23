@@ -24,7 +24,7 @@ connection.once("open",()=>{
 app.get('/favorite', async(req,res)=>{
 	try {
 		
-		const response = await Jokes.find()
+		const response = await jokes.find()
 		res.json({"favorites":response})
 	} catch (error) {
 	res.json({"error":error})

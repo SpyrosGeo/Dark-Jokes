@@ -3,6 +3,7 @@ import Joke from "./components/Joke";
 import Selector from "./components/Selector";
 import "./App.css";
 import axios from "axios";
+import {v4 as uuidv4} from "uuid"
 
 interface IJoke {
   setup: string;
@@ -51,7 +52,7 @@ const App: React.FC = () => {
       url: "http://localhost:5000/favorite",
     data:{
       joke,
-      _id:"1234"
+      _id:uuidv4()
     }  
     });
     console.log(response);
