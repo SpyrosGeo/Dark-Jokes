@@ -4,7 +4,7 @@ import Selector from "./components/Selector";
 import Favorite from "./components/Favorite";
 import "./App.css";
 import axios from "axios";
-import {v4 as uuidv4} from "uuid"
+import { v4 as uuidv4 } from "uuid";
 
 interface IJoke {
   setup: string;
@@ -18,22 +18,23 @@ const App: React.FC = () => {
     setup: "",
     delivery: "",
   });
-  const [favorite,setFavorite] = useState<IJoke>({
-    setup:"",
-    delivery:""
-  })
+  const [favorite, setFavorite] = useState<IJoke>({
+    setup: "",
+    delivery: "",
+  });
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get("http://localhost:5000/favorite");
-    const {joke} = response.data.favorites[0]
-    const {setup,delivery} =joke
-    setFavorite({
-      setup,
-      delivery
-    })
+      const randomIndex = Math.floor(Math.random()*response.data.favorites.length)
+      const { joke } = response.data.favorites[randomIndex];
+      const { setup, delivery } = joke;
+      setFavorite({
+        setup,
+        delivery,
+      });
     };
     fetchData();
-  }, [choice])
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLElement>) => {
     const { value } = e.target as typeof e.target & {
@@ -55,10 +56,10 @@ const App: React.FC = () => {
     const response = await axios({
       method: "post",
       url: "http://localhost:5000/favorite",
-    data:{
-      joke,
-      _id:uuidv4()
-    }  
+      data: {
+        joke,
+        _id: uuidv4(),
+      },
     });
     console.log(response);
   };
@@ -71,7 +72,7 @@ const App: React.FC = () => {
         </div>
         <div>
           <button className="button" onClick={handleClick}>
-            Next Joke 
+            Next Joke
           </button>
           <button type="submit" onClick={handleFavorite} className="button">
             star
@@ -80,7 +81,7 @@ const App: React.FC = () => {
       </div>
       <Joke joke={joke} />
       <div>
-        <Favorite favorite={favorite}/>
+        <Favorite favorite={favorite} />
       </div>
     </div>
   );

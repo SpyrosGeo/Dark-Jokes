@@ -1,11 +1,6 @@
 import React,{FC}from 'react'
 import "./Joke.css"
-interface JokeProps {
-	joke:{
-		setup:string;
-		delivery:string;
-	}
-}
+import { JokeProps } from '../utils/Interfaces';
 
  const Joke: FC<JokeProps> = ({joke})=> {
 	const {setup,delivery} = joke;
