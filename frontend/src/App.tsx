@@ -18,12 +18,16 @@ const App: React.FC = () => {
     setup: "",
     delivery: "",
   });
+  const [favorite,setFavorite] = useState<IJoke>({
+    setup:"",
+    delivery:""
+  })
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get("http://localhost:5000/favorite");
     const {joke} = response.data.favorites[0]
     const {setup,delivery} =joke
-    setJoke({
+    setFavorite({
       setup,
       delivery
     })
@@ -76,7 +80,7 @@ const App: React.FC = () => {
       </div>
       <Joke joke={joke} />
       <div>
-        <Favorite />
+        <Favorite favorite={favorite}/>
       </div>
     </div>
   );
